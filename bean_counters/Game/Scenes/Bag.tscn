@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://ceejpbwiyussu"]
+
+[ext_resource type="Script" uid="uid://i4v71m177ice" path="res://Game/Scripts/bag.gd" id="1_fjh62"]
+[ext_resource type="Texture2D" uid="uid://ba0nt580y1nsc" path="res://Game/Images/bag.png" id="2_mfrvf"]
+[ext_resource type="Texture2D" uid="uid://v4kjcfnu75y4" path="res://Game/Images/bag2.png" id="3_rpfwp"]
+[ext_resource type="Texture2D" uid="uid://bld03eohjobn" path="res://Game/Images/bag3.png" id="4_7asr3"]
+[ext_resource type="Texture2D" uid="uid://ff5yj1231t2a" path="res://Game/Images/bag4.png" id="5_p6axx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fjh62"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mfrvf")
+}],
+"loop": false,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_rpfwp")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_7asr3")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_p6axx")
+}],
+"loop": true,
+"name": &"4",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8sudq"]
+radius = 111.0
+height = 520.0
+
+[node name="Bag" type="CharacterBody2D" groups=["Bags"]]
+z_index = 3
+scale = Vector2(0.7, 0.7)
+collision_layer = 4
+script = ExtResource("1_fjh62")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -2)
+sprite_frames = SubResource("SpriteFrames_fjh62")
+animation = &"1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_8sudq")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-250, -102, 501, 200)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

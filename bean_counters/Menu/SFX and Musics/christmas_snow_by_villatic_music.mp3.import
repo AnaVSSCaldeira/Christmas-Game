@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://xcctjxdglg04"
+path="res://.godot/imported/christmas_snow_by_villatic_music.mp3-bc63ee97bcaa42cdc426e6b7f1e2845a.mp3str"
+
+[deps]
+
+source_file="res://Menu/SFX and Musics/christmas_snow_by_villatic_music.mp3"
+dest_files=["res://.godot/imported/christmas_snow_by_villatic_music.mp3-bc63ee97bcaa42cdc426e6b7f1e2845a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

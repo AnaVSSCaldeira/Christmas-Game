@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b6b7sr40o84du"
+path="res://.godot/imported/Theme.mp3-db935f6c9356457f718c5e9d57c5739a.mp3str"
+
+[deps]
+
+source_file="res://Game/SFX and Musics/Theme.mp3"
+dest_files=["res://.godot/imported/Theme.mp3-db935f6c9356457f718c5e9d57c5739a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

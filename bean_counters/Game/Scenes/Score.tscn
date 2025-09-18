@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdhvo4lkcbn54"]
+
+[ext_resource type="Script" uid="uid://q5k0c8hetug7" path="res://Game/Scripts/score.gd" id="1_fg5so"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hrmoj"]
+
+[node name="Score" type="Area2D"]
+script = ExtResource("1_fg5so")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2.04, 2.04)
+shape = SubResource("RectangleShape2D_hrmoj")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
