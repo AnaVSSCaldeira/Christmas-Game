@@ -102,7 +102,7 @@ position = Vector2(2217, 609)
 [node name="Limits" type="CharacterBody2D" parent="."]
 position = Vector2(1086, 1049)
 scale = Vector2(0.6000037, 0.6000037)
-collision_layer = 2
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Limits"]
 position = Vector2(-177.4989, 44.999756)

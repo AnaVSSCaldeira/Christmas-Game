@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var gravity: float = 1000
+var destroy = 0
 
 func _ready():
 	randi_range(-200, -600)
@@ -9,8 +10,16 @@ func _ready():
 	velocity = base_force * random_scale
 
 func _physics_process(delta):
-	velocity.y += gravity * delta
-	move_and_slide()
+	if !is_on_floor():
+		velocity.y += gravity * delta
+		move_and_slide()
+	else:
+		destroy += 1
+		if destroy == 1:
+			await get_tree().create_timer(2).timeout
+			queue_free()
+
+
 
 func setup(anim):
 	$AnimatedSprite2D.animation = anim

@@ -9,13 +9,21 @@ extends Node2D
 @onready var timer_count = $"Control/HBoxContainer/Time left/Timer_count"
 
 @onready var bag_spawner_timer = $BagSpawner/Cooldown_timer
+@onready var bag_spawner = $BagSpawner
+
+@onready var global = $"/root/global"
+
+var wave_count = 0
+var spawn_timer = 2.5
+var wave_timer = 41
+var player_life = 5
 
 func _ready():
 	score_count.text = "0"
-	life_count.text = str(player.life)
-	level_count.text = "1"
-	$Wave_timer.start(41)
-	bag_spawner_timer.start(2.5)
+	life_count.text = str(player_life)
+	level_count.text = str(wave_count + 1)
+	$Wave_timer.start(wave_timer)
+	bag_spawner_timer.start(spawn_timer)
 	
 func _process(delta):
 	if $Wave_timer.is_stopped() == false:
@@ -30,9 +38,22 @@ func update_score():
 
 func _on_wave_timer_timeout():
 	bag_spawner_timer.stop()
+	wave_count += 1
+	bag_spawner.current_wave = wave_count
+	level_count.text = str(wave_count + 1)
+	
+	if wave_count < 4:
+		await get_tree().create_timer(5).timeout
+		wave_timer += 20
+		spawn_timer -= 0.5
+		$Wave_timer.start(wave_timer)
+		bag_spawner_timer.start(spawn_timer)
+	
+	else:
+		print("fim")
 
 func damage():
-	if player.life > 0:
+	if player_life > 0:
 		player.bags = 0
 
 		player.is_hurt = true
@@ -40,9 +61,9 @@ func damage():
 		player.get_node("CollisionShape2D").disabled = true
 		player.collision_layer = 2
 
-		player.life -= 1
-		life_count.text = str(player.life)
-		if player.life == 0:
+		player_life -= 1
+		life_count.text = str(player_life)
+		if player_life == 0:
 			game_over()
 		
 		await get_tree().create_timer(3).timeout
@@ -53,4 +74,17 @@ func damage():
 		player.collision_layer = 1
 
 func game_over():
-	print("fim de jogo")
+	bag_spawner_timer.stop()
+	$Wave_timer.stop()
+	restart()
+
+func restart():
+	player_life = 5
+	life_count.text = str(player_life)
+	score_count.text = "0"
+	wave_count = 0
+	level_count.text = str(wave_count + 1)
+	wave_timer = 41
+	spawn_timer = 2.5
+	$Wave_timer.start(wave_timer)
+	bag_spawner_timer.start(spawn_timer)

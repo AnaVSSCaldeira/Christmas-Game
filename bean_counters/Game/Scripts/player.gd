@@ -3,7 +3,6 @@ extends CharacterBody2D
 var speed: float = 10.0
 @export var bags: int = 0
 @export var is_hurt = false
-@export var life: int = 4
 
 func _physics_process(delta):
 	if is_hurt == false:
@@ -41,6 +40,6 @@ func _on_area_2d_body_entered(body):
 					$AnimatedSprite2D.animation = str(bags)
 					body.queue_free()
 				else:
-					bags = 5
+					get_parent().damage()
 			else:
 				get_parent().damage()

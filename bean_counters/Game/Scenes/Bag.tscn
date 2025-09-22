@@ -43,7 +43,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8sudq"]
 radius = 111.0
-height = 520.0
+height = 528.5714
 
 [node name="Bag" type="CharacterBody2D" groups=["Bags"]]
 z_index = 3
