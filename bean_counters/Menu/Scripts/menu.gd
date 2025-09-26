@@ -1,8 +1,11 @@
 extends Node2D
 
-@onready var screen = $Screen
+@onready var screen1 = $Options_screen
+@onready var screen2 = $Control_screen
 
 func _ready():
+	screen1.visible = false
+	screen2.visible = false
 	for button in $Control/VBoxContainer.get_children():
 		button.connect("mouse_entered", Callable(self, "_on_button_hovered").bind(button))
 
@@ -23,12 +26,16 @@ func _on_play_pressed():
 	get_tree().change_scene_to_file("res://Game/Scenes/Game.tscn")
 
 func _on_instructions_pressed():
+	if screen1.visible == true:
+		screen1.visible = false
 	select_sound("Instructions")
-	screen.visible = !(screen.visible)
+	screen2.visible = !(screen2.visible)
 
 func _on_options_pressed():
+	if screen2.visible == true:
+		screen2.visible = false
 	select_sound("Options")
-	screen.visible = !(screen.visible)
+	screen1.visible = !(screen1.visible)
 
 func _on_exit_pressed():
 	select_sound("Exit")

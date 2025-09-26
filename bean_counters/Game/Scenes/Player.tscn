@@ -80,7 +80,7 @@ script = ExtResource("1_gctag")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gctag")
-animation = &"2"
+animation = &"Normal"
 autoplay = "Normal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
