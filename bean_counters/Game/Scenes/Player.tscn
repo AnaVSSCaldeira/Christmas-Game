@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dhxpq4o1g0cq8"]
+[gd_scene load_steps=13 format=3 uid="uid://dhxpq4o1g0cq8"]
 
 [ext_resource type="Script" uid="uid://bot7q4l7r2i0n" path="res://Game/Scripts/player.gd" id="1_gctag"]
 [ext_resource type="Texture2D" uid="uid://drdetnk1bsug5" path="res://Game/Images/player.png" id="2_f8br2"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dshjwxl3g3lsm" path="res://Game/Images/player_4.png" id="5_7memh"]
 [ext_resource type="Texture2D" uid="uid://dmagie76jk7gl" path="res://Game/Images/player_5.png" id="6_biwex"]
 [ext_resource type="Texture2D" uid="uid://c1edmonw7psd8" path="res://Game/Images/player_hurt.png" id="7_k821p"]
+[ext_resource type="AudioStream" uid="uid://cena4ki1r6udf" path="res://Game/SFX and Musics/ouch.mp3" id="9_ic45v"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gctag"]
 animations = [{
@@ -96,5 +97,9 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(1, -309.5)
 shape = SubResource("RectangleShape2D_k821p")
+
+[node name="Damage" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_ic45v")
+bus = &"SFX"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

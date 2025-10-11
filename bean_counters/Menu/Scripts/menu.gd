@@ -21,6 +21,8 @@ func select_sound(type_button):
 		sound.play()
 
 func _on_play_pressed():
+	$"/root/global".music_vol = db_to_linear(AudioServer.get_bus_volume_db(1))
+	$"/root/global".sfx_vol = db_to_linear(AudioServer.get_bus_volume_db(2))
 	select_sound("Play")
 	await get_tree().create_timer(0.5).timeout
 	get_tree().change_scene_to_file("res://Game/Scenes/Game.tscn")
@@ -32,6 +34,10 @@ func _on_instructions_pressed():
 	screen2.visible = !(screen2.visible)
 
 func _on_options_pressed():
+	# $Options_screen/VBoxContainer/SliderMaster.value = db_to_linear(AudioServer.get_bus_volume_db(0))
+	$Options_screen/VBoxContainer/SliderMusic.value = db_to_linear(AudioServer.get_bus_volume_db(1))
+	$Options_screen/VBoxContainer/SliderSFX.value = db_to_linear(AudioServer.get_bus_volume_db(2))
+
 	if screen2.visible == true:
 		screen2.visible = false
 	select_sound("Options")
@@ -42,3 +48,16 @@ func _on_exit_pressed():
 	await get_tree().create_timer(0.3).timeout
 	get_tree().quit()
 
+func _on_save_pressed():
+	# AudioServer.set_bus_volume_db(0, linear_to_db($Options_screen/VBoxContainer/SliderMaster.value))
+	AudioServer.set_bus_volume_db(1, linear_to_db($Options_screen/VBoxContainer/SliderMusic.value))
+	AudioServer.set_bus_volume_db(2, linear_to_db($Options_screen/VBoxContainer/SliderSFX.value))
+
+func _on_slider_master_mouse_exited():
+	$Options_screen.release_focus()
+
+func _on_slider_music_mouse_exited():
+	$Options_screen.release_focus()
+
+func _on_slider_sfx_mouse_exited():
+	$Options_screen.release_focus()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://by76mj3hoxsd6"]
+[gd_scene load_steps=19 format=3 uid="uid://by76mj3hoxsd6"]
 
 [ext_resource type="Script" uid="uid://cswfggo2atew2" path="res://Menu/Scripts/menu.gd" id="1_1c4t6"]
 [ext_resource type="Texture2D" uid="uid://dabp4jwens3si" path="res://Menu/Images/b_play.png" id="2_3vxhy"]
@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://b8kmgnfrgu7w8" path="res://Game/Images/b_controls_hover.png" id="8_co3wy"]
 [ext_resource type="AudioStream" uid="uid://xcctjxdglg04" path="res://Menu/SFX and Musics/christmas_snow_by_villatic_music.mp3" id="14_co3wy"]
 [ext_resource type="PackedScene" uid="uid://de1q6qyaxlud5" path="res://Scenes/Snow_effect.tscn" id="15_hkslu"]
+[ext_resource type="Texture2D" uid="uid://dcce5wn20hom1" path="res://Game/Images/b_exit.png" id="16_44ixw"]
+[ext_resource type="Texture2D" uid="uid://1hbwbbly1of3" path="res://Game/Images/b_exit_hover.png" id="17_0ip5m"]
 
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_1c4t6")
@@ -24,29 +26,6 @@ script = ExtResource("1_1c4t6")
 position = Vector2(960, 540)
 texture = ExtResource("2_oxlmi")
 flip_h = true
-
-[node name="Options_screen" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 930.0
-offset_top = 520.0
-offset_right = 970.0
-offset_bottom = 560.0
-
-[node name="Screen" type="Sprite2D" parent="Options_screen"]
-texture_filter = 1
-texture = ExtResource("3_hkslu")
-
-[node name="Control_screen" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 930.0
-offset_top = 520.0
-offset_right = 1067.0
-offset_bottom = 650.0
-
-[node name="screen" type="Sprite2D" parent="Control_screen"]
-texture = ExtResource("4_irw30")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -71,10 +50,12 @@ texture_hover = ExtResource("3_p4p8b")
 
 [node name="Hover" type="AudioStreamPlayer" parent="Control/VBoxContainer/Play"]
 stream = ExtResource("5_oxlmi")
+bus = &"SFX"
 
 [node name="Click" type="AudioStreamPlayer" parent="Control/VBoxContainer/Play"]
 process_mode = 3
 stream = ExtResource("6_oqrcm")
+bus = &"SFX"
 
 [node name="Instructions" type="TextureButton" parent="Control/VBoxContainer"]
 layout_mode = 2
@@ -84,10 +65,12 @@ texture_hover = ExtResource("8_co3wy")
 
 [node name="Hover" type="AudioStreamPlayer" parent="Control/VBoxContainer/Instructions"]
 stream = ExtResource("5_oxlmi")
+bus = &"SFX"
 
 [node name="Click" type="AudioStreamPlayer" parent="Control/VBoxContainer/Instructions"]
 process_mode = 3
 stream = ExtResource("6_oqrcm")
+bus = &"SFX"
 
 [node name="Options" type="TextureButton" parent="Control/VBoxContainer"]
 layout_mode = 2
@@ -97,10 +80,12 @@ texture_hover = ExtResource("5_1lm7l")
 
 [node name="Hover" type="AudioStreamPlayer" parent="Control/VBoxContainer/Options"]
 stream = ExtResource("5_oxlmi")
+bus = &"SFX"
 
 [node name="Click" type="AudioStreamPlayer" parent="Control/VBoxContainer/Options"]
 process_mode = 3
 stream = ExtResource("6_oqrcm")
+bus = &"SFX"
 
 [node name="Exit" type="TextureButton" parent="Control/VBoxContainer"]
 layout_mode = 2
@@ -110,21 +95,116 @@ texture_hover = ExtResource("6_wdime")
 
 [node name="Hover" type="AudioStreamPlayer" parent="Control/VBoxContainer/Exit"]
 stream = ExtResource("5_oxlmi")
+bus = &"SFX"
 
 [node name="Click" type="AudioStreamPlayer" parent="Control/VBoxContainer/Exit"]
 process_mode = 3
 stream = ExtResource("6_oqrcm")
+bus = &"SFX"
 
 [node name="Theme" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_co3wy")
 volume_db = -20.0
 autoplay = true
+bus = &"Music"
 parameters/looping = true
 
 [node name="Snow_effect" parent="." instance=ExtResource("15_hkslu")]
 position = Vector2(942, 0)
 
+[node name="Options_screen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 930.0
+offset_top = 520.0
+offset_right = 970.0
+offset_bottom = 560.0
+
+[node name="Screen" type="Sprite2D" parent="Options_screen"]
+texture_filter = 1
+texture = ExtResource("3_hkslu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options_screen"]
+layout_mode = 0
+offset_left = -372.0
+offset_top = -148.0
+offset_right = 124.0
+offset_bottom = 55.0
+scale = Vector2(1.5, 1.5)
+theme_override_constants/separation = 10
+
+[node name="Master" type="Label" parent="Options_screen/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 25
+text = "Master"
+horizontal_alignment = 1
+
+[node name="SliderMaster" type="HSlider" parent="Options_screen/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.05
+
+[node name="Music" type="Label" parent="Options_screen/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 25
+text = "Music"
+horizontal_alignment = 1
+
+[node name="SliderMusic" type="HSlider" parent="Options_screen/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.05
+
+[node name="SFX" type="Label" parent="Options_screen/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 25
+text = "SFX"
+horizontal_alignment = 1
+
+[node name="SliderSFX" type="HSlider" parent="Options_screen/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.05
+
+[node name="Save" type="TextureButton" parent="Options_screen"]
+layout_mode = 0
+offset_left = -91.0
+offset_top = 221.0
+offset_right = 309.0
+offset_bottom = 421.0
+scale = Vector2(0.5, 0.5)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("16_44ixw")
+texture_hover = ExtResource("17_0ip5m")
+
+[node name="Control_screen" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 930.0
+offset_top = 520.0
+offset_right = 1067.0
+offset_bottom = 650.0
+
+[node name="screen" type="Sprite2D" parent="Control_screen"]
+texture = ExtResource("4_irw30")
+
 [connection signal="pressed" from="Control/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Instructions" to="." method="_on_instructions_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="mouse_exited" from="Options_screen/VBoxContainer/SliderMaster" to="." method="_on_slider_master_mouse_exited"]
+[connection signal="mouse_exited" from="Options_screen/VBoxContainer/SliderMusic" to="." method="_on_slider_music_mouse_exited"]
+[connection signal="mouse_exited" from="Options_screen/VBoxContainer/SliderSFX" to="." method="_on_slider_sfx_mouse_exited"]
+[connection signal="pressed" from="Options_screen/Save" to="." method="_on_save_pressed"]

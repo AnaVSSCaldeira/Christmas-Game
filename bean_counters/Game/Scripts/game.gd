@@ -19,6 +19,8 @@ var wave_timer = 41
 var player_life = 5
 
 func _ready():
+	$Pause.visible = false
+	get_tree().paused = false
 	score_count.text = "0"
 	life_count.text = str(player_life)
 	level_count.text = str(wave_count + 1)
@@ -54,6 +56,7 @@ func _on_wave_timer_timeout():
 
 func damage():
 	if player_life > 0:
+		$Player/Damage.play()
 		player.bags = 0
 
 		player.is_hurt = true
@@ -88,3 +91,8 @@ func restart():
 	spawn_timer = 2.5
 	$Wave_timer.start(wave_timer)
 	bag_spawner_timer.start(spawn_timer)
+
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		$Pause.visible = true
+		get_tree().paused = true

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cena4ki1r6udf"
+path="res://.godot/imported/ouch.mp3-bd821addfc6d4cdf3cddf9597f930504.mp3str"
+
+[deps]
+
+source_file="res://Game/SFX and Musics/ouch.mp3"
+dest_files=["res://.godot/imported/ouch.mp3-bd821addfc6d4cdf3cddf9597f930504.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
