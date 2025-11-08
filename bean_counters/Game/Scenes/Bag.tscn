@@ -54,7 +54,7 @@ script = ExtResource("1_fjh62")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_fjh62")
-animation = &"1"
+animation = &"4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -1.5707964

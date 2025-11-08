@@ -15,17 +15,21 @@ extends Node2D
 
 var wave_count = 0
 var spawn_timer = 2.5
-var wave_timer = 41
+var wave_timer = 3 #MUDAR
+# var wave_timer = 41 #para debug
 var player_life = 5
+var can_pause = true
 
 func _ready():
 	$Pause.visible = false
 	get_tree().paused = false
 	score_count.text = "0"
 	life_count.text = str(player_life)
-	level_count.text = str(wave_count + 1)
+	wave_count += 1
+	level_count.text = str(wave_count)
 	$Wave_timer.start(wave_timer)
 	bag_spawner_timer.start(spawn_timer)
+	can_pause = true
 	
 func _process(delta):
 	if $Wave_timer.is_stopped() == false:
@@ -41,18 +45,21 @@ func update_score():
 func _on_wave_timer_timeout():
 	bag_spawner_timer.stop()
 	wave_count += 1
-	bag_spawner.current_wave = wave_count
-	level_count.text = str(wave_count + 1)
-	
-	if wave_count < 4:
-		await get_tree().create_timer(5).timeout
-		wave_timer += 20
+	bag_spawner.current_wave = wave_count - 1
+	if wave_count <= 5:
+		can_pause = false
+		await get_tree().create_timer(4).timeout
+		$Next_wave_counter.start_counter()
+		await get_tree().create_timer(4).timeout
+		level_count.text = str(wave_count)
+		can_pause = true
+		# wave_timer += 20 #MUDAR
 		spawn_timer -= 0.5
 		$Wave_timer.start(wave_timer)
 		bag_spawner_timer.start(spawn_timer)
 	
 	else:
-		print("fim")
+		end_game()
 
 func damage():
 	if player_life > 0:
@@ -79,7 +86,7 @@ func damage():
 func game_over():
 	bag_spawner_timer.stop()
 	$Wave_timer.stop()
-	restart()
+	end_game()
 
 func restart():
 	player_life = 5
@@ -91,8 +98,25 @@ func restart():
 	spawn_timer = 2.5
 	$Wave_timer.start(wave_timer)
 	bag_spawner_timer.start(spawn_timer)
+	can_pause = true
 
 func _input(event):
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel") and can_pause:
+		$Pause/VBoxContainer/SliderMusic.value = db_to_linear(AudioServer.get_bus_volume_db(1))
+		$Pause/VBoxContainer/SliderSFX.value = db_to_linear(AudioServer.get_bus_volume_db(2))
 		$Pause.visible = true
 		get_tree().paused = true
+
+func _on_close_pressed():
+	$Pause.visible = false
+	get_tree().paused = false
+
+func _on_save_pressed():
+	AudioServer.set_bus_volume_db(1, linear_to_db($Pause/VBoxContainer/SliderMusic.value))
+	AudioServer.set_bus_volume_db(2, linear_to_db($Pause/VBoxContainer/SliderSFX.value))
+
+	$"/root/global".music_vol = db_to_linear(AudioServer.get_bus_volume_db(1))
+	$"/root/global".sfx_vol = db_to_linear(AudioServer.get_bus_volume_db(2))
+
+func end_game():
+	pass

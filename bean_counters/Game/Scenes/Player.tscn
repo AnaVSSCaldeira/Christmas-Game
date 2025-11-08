@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bot7q4l7r2i0n" path="res://Game/Scripts/player.gd" id="1_gctag"]
 [ext_resource type="Texture2D" uid="uid://drdetnk1bsug5" path="res://Game/Images/player.png" id="2_f8br2"]
-[ext_resource type="Texture2D" uid="uid://dlb0ti40p078y" path="res://Game/Images/player_1.png" id="2_lpxnf"]
-[ext_resource type="Texture2D" uid="uid://cgxl0bodduikf" path="res://Game/Images/player_2.png" id="3_k821p"]
-[ext_resource type="Texture2D" uid="uid://bo5uktmqcnpyf" path="res://Game/Images/player_3.png" id="4_ic45v"]
-[ext_resource type="Texture2D" uid="uid://dshjwxl3g3lsm" path="res://Game/Images/player_4.png" id="5_7memh"]
-[ext_resource type="Texture2D" uid="uid://dmagie76jk7gl" path="res://Game/Images/player_5.png" id="6_biwex"]
+[ext_resource type="Texture2D" uid="uid://bx65hq5k8o43c" path="res://Game/Images/player_final1.png" id="2_ic45v"]
+[ext_resource type="Texture2D" uid="uid://ddu5cqpolucra" path="res://Game/Images/player_final2.png" id="3_7memh"]
+[ext_resource type="Texture2D" uid="uid://dov3b6sr108yu" path="res://Game/Images/player_final3.png" id="4_biwex"]
+[ext_resource type="Texture2D" uid="uid://d328dj1xp1h83" path="res://Game/Images/player_final4.png" id="5_60urk"]
+[ext_resource type="Texture2D" uid="uid://ri45t1kad0ro" path="res://Game/Images/player_final5.png" id="6_v5tae"]
 [ext_resource type="Texture2D" uid="uid://c1edmonw7psd8" path="res://Game/Images/player_hurt.png" id="7_k821p"]
 [ext_resource type="AudioStream" uid="uid://cena4ki1r6udf" path="res://Game/SFX and Musics/ouch.mp3" id="9_ic45v"]
 
@@ -14,7 +14,7 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_lpxnf")
+"texture": ExtResource("2_ic45v")
 }],
 "loop": true,
 "name": &"1",
@@ -22,7 +22,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_k821p")
+"texture": ExtResource("3_7memh")
 }],
 "loop": true,
 "name": &"2",
@@ -30,7 +30,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_ic45v")
+"texture": ExtResource("4_biwex")
 }],
 "loop": true,
 "name": &"3",
@@ -38,7 +38,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_7memh")
+"texture": ExtResource("5_60urk")
 }],
 "loop": true,
 "name": &"4",
@@ -46,7 +46,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_biwex")
+"texture": ExtResource("6_v5tae")
 }],
 "loop": true,
 "name": &"5",
@@ -86,16 +86,15 @@ autoplay = "Normal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(0, 49.5)
+position = Vector2(0, 240)
 shape = SubResource("RectangleShape2D_rw3lw")
 one_way_collision = true
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(1, -309.5)
+position = Vector2(1, -21)
 shape = SubResource("RectangleShape2D_k821p")
 
 [node name="Damage" type="AudioStreamPlayer" parent="."]

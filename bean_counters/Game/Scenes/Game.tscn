@@ -1,15 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://dk6jicep4wbsb"]
+[gd_scene load_steps=15 format=3 uid="uid://dk6jicep4wbsb"]
 
 [ext_resource type="Texture2D" uid="uid://digsvxfcq0ufk" path="res://Game/Images/game_bg.png" id="1_f48nx"]
 [ext_resource type="Script" uid="uid://dp58e8s7i4trt" path="res://Game/Scripts/game.gd" id="1_thwfy"]
 [ext_resource type="PackedScene" uid="uid://6p77o52o066k" path="res://Game/Scenes/BagSpawner.tscn" id="2_6socv"]
 [ext_resource type="AudioStream" uid="uid://bdgef6ycfu21c" path="res://Game/SFX and Musics/snow_by_Villatic_music.mp3" id="3_6socv"]
-[ext_resource type="Script" path="res://Game/Scripts/control.gd" id="3_g00g5"]
 [ext_resource type="PackedScene" uid="uid://dhxpq4o1g0cq8" path="res://Game/Scenes/Player.tscn" id="4_4hm0i"]
 [ext_resource type="PackedScene" uid="uid://cdhvo4lkcbn54" path="res://Game/Scenes/Score.tscn" id="5_h0auy"]
 [ext_resource type="Texture2D" uid="uid://cd0pfsf1ssh3j" path="res://Game/Images/screen1.png" id="7_w76w2"]
 [ext_resource type="Texture2D" uid="uid://dcce5wn20hom1" path="res://Game/Images/b_exit.png" id="8_g00g5"]
 [ext_resource type="Texture2D" uid="uid://1hbwbbly1of3" path="res://Game/Images/b_exit_hover.png" id="9_qagud"]
+[ext_resource type="AudioStream" uid="uid://dlxkqi3gsm286" path="res://Game/SFX and Musics/timer_countdowm.mp3" id="11_dd4jq"]
+[ext_resource type="Script" uid="uid://tmti2k8egkm8" path="res://Game/Scenes/next_wave_counter.gd" id="11_nraes"]
 [ext_resource type="Texture2D" uid="uid://ca261msxr1ajb" path="res://Game/Images/screen2.png" id="11_qagud"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4hm0i"]
@@ -30,7 +31,6 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("3_g00g5")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control"]
 layout_mode = 0
@@ -101,7 +101,7 @@ bus = &"Music"
 parameters/looping = true
 
 [node name="Player" parent="." instance=ExtResource("4_4hm0i")]
-position = Vector2(1082, 815.00006)
+position = Vector2(1082, 638.00006)
 scale = Vector2(0.6000037, 0.6000037)
 
 [node name="BagSpawner" parent="." instance=ExtResource("2_6socv")]
@@ -209,21 +209,76 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource("8_g00g5")
 texture_hover = ExtResource("9_qagud")
 
-[node name="GameOver" type="Control" parent="."]
+[node name="Close" type="TextureButton" parent="Pause"]
+layout_mode = 0
+offset_left = 357.0
+offset_top = -349.0
+offset_right = 397.0
+offset_bottom = -309.0
+
+[node name="EndGame" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 994.0
-offset_top = 535.0
+offset_top = 474.0
 offset_right = 1034.0
-offset_bottom = 575.0
+offset_bottom = 514.0
 
-[node name="Sprite2D" type="Sprite2D" parent="GameOver"]
+[node name="Sprite2D" type="Sprite2D" parent="EndGame"]
+position = Vector2(0, 51.99996)
+scale = Vector2(1, 1.1485714)
 texture = ExtResource("11_qagud")
 
-[node name="TextureButton" type="TextureButton" parent="GameOver"]
+[node name="TextureButton" type="TextureButton" parent="EndGame"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_default_cursor_shape = 2
 
+[node name="Win" type="Label" parent="EndGame"]
+layout_mode = 0
+offset_left = -347.0
+offset_top = -351.0
+offset_right = 342.0
+offset_bottom = 206.0
+theme_override_font_sizes/font_size = 100
+text = "Uhuuul!
+You did it!
+Do you wanna
+try again?"
+horizontal_alignment = 1
+
+[node name="GameOver" type="Label" parent="EndGame"]
+layout_mode = 0
+offset_left = -595.0
+offset_top = -303.0
+offset_right = 590.0
+offset_bottom = 114.0
+theme_override_font_sizes/font_size = 100
+text = "Oh no!
+Do you wanna
+try again?"
+horizontal_alignment = 1
+
+[node name="Next_wave_counter" type="Marker2D" parent="."]
+script = ExtResource("11_nraes")
+
+[node name="Numbers" type="Label" parent="Next_wave_counter"]
+visible = false
+offset_left = 836.0
+offset_top = 222.0
+offset_right = 1178.0
+offset_bottom = 495.0
+theme_override_font_sizes/font_size = 200
+text = "999"
+horizontal_alignment = 1
+
+[node name="Countdown" type="AudioStreamPlayer" parent="Next_wave_counter"]
+stream = ExtResource("11_dd4jq")
+
+[node name="Timer" type="Timer" parent="Next_wave_counter"]
+
 [connection signal="timeout" from="Wave_timer" to="." method="_on_wave_timer_timeout"]
+[connection signal="pressed" from="Pause/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Pause/Close" to="." method="_on_close_pressed"]
+[connection signal="timeout" from="Next_wave_counter/Timer" to="Next_wave_counter" method="_on_timer_timeout"]
