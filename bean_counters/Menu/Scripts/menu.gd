@@ -9,6 +9,8 @@ func _ready():
 	for button in $Control/VBoxContainer.get_children():
 		button.connect("mouse_entered", Callable(self, "_on_button_hovered").bind(button))
 
+	$Options_screen/Save.connect("mouse_entered", Callable(self, "_on_button_hovered").bind($Options_screen/Save))
+
 func _on_button_hovered(button):
 	var sound = button.get_node("Hover")
 	if sound:
@@ -49,6 +51,10 @@ func _on_exit_pressed():
 	get_tree().quit()
 
 func _on_save_pressed():
+	var button = get_node("Options_screen/Save")
+	var sound = button.get_node("Click")
+	if sound:
+		sound.play()
 	# AudioServer.set_bus_volume_db(0, linear_to_db($Options_screen/VBoxContainer/SliderMaster.value))
 	AudioServer.set_bus_volume_db(1, linear_to_db($Options_screen/VBoxContainer/SliderMusic.value))
 	AudioServer.set_bus_volume_db(2, linear_to_db($Options_screen/VBoxContainer/SliderSFX.value))
