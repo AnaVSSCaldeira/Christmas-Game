@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4c82so2yniqq"
-path="res://.godot/imported/b_controls_hover.png-dbe44509b1ca28f40ba344fcc6014988.ctex"
+uid="uid://cim25xj1qaihn"
+path="res://.godot/imported/win.png-088d069805a1c566ad4b768ee328b56d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Images/b_controls_hover.png"
-dest_files=["res://.godot/imported/b_controls_hover.png-dbe44509b1ca28f40ba344fcc6014988.ctex"]
+source_file="res://Game/Images/win.png"
+dest_files=["res://.godot/imported/win.png-088d069805a1c566ad4b768ee328b56d.ctex"]
 
 [params]
 

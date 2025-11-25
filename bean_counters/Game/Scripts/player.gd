@@ -41,5 +41,7 @@ func _on_area_2d_body_entered(body):
 					body.queue_free()
 				else:
 					get_parent().damage()
+			elif body.get_node("AnimatedSprite2D").animation == "life":
+				get_parent().healing(body)
 			else:
 				get_parent().damage()

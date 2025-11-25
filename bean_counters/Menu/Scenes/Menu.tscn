@@ -12,8 +12,8 @@
 [ext_resource type="AudioStream" uid="uid://cde0tpfoybihe" path="res://Menu/SFX and Musics/hover.wav" id="5_oxlmi"]
 [ext_resource type="AudioStream" uid="uid://f4wcf7g12npa" path="res://Menu/SFX and Musics/click.wav" id="6_oqrcm"]
 [ext_resource type="Texture2D" uid="uid://so5gj7kl2kjt" path="res://Menu/Images/b_exit_hover.png" id="6_wdime"]
-[ext_resource type="Texture2D" uid="uid://bbiavduekf2vn" path="res://Game/Images/b_controls.png" id="7_wtnjr"]
-[ext_resource type="Texture2D" uid="uid://b8kmgnfrgu7w8" path="res://Game/Images/b_controls_hover.png" id="8_co3wy"]
+[ext_resource type="Texture2D" uid="uid://bd71x4be0u3d0" path="res://Game/Images/b_controls.png" id="7_wtnjr"]
+[ext_resource type="Texture2D" uid="uid://4c82so2yniqq" path="res://Game/Images/b_controls_hover.png" id="8_co3wy"]
 [ext_resource type="AudioStream" uid="uid://xcctjxdglg04" path="res://Menu/SFX and Musics/christmas_snow_by_villatic_music.mp3" id="14_co3wy"]
 [ext_resource type="PackedScene" uid="uid://de1q6qyaxlud5" path="res://Scenes/Snow_effect.tscn" id="15_hkslu"]
 [ext_resource type="Texture2D" uid="uid://cvcxyyep7cctv" path="res://Menu/Images/b_save.png" id="16_44ixw"]
@@ -209,6 +209,17 @@ offset_bottom = 650.0
 
 [node name="screen" type="Sprite2D" parent="Control_screen"]
 texture = ExtResource("4_irw30")
+
+[node name="Label" type="Label" parent="Control_screen"]
+layout_mode = 0
+offset_left = -369.0
+offset_top = -46.0
+offset_right = 369.0
+offset_bottom = 167.0
+theme_override_font_sizes/font_size = 50
+text = "Mouse - Move the bear
+P - pause
+Get the gifts for Santa Claus!"
 
 [connection signal="pressed" from="Control/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Instructions" to="." method="_on_instructions_pressed"]

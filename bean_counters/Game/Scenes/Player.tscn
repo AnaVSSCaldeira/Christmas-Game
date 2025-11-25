@@ -76,12 +76,14 @@ size = Vector2(490, 587)
 size = Vector2(510, 101)
 
 [node name="Player" type="CharacterBody2D"]
+process_mode = 1
 collision_mask = 2
 script = ExtResource("1_gctag")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+process_mode = 1
 sprite_frames = SubResource("SpriteFrames_gctag")
-animation = &"Normal"
+animation = &"Hurt"
 autoplay = "Normal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -98,6 +100,7 @@ position = Vector2(1, -21)
 shape = SubResource("RectangleShape2D_k821p")
 
 [node name="Damage" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("9_ic45v")
 bus = &"SFX"
 

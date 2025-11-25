@@ -34,6 +34,8 @@ func _on_cooldown_timer_timeout():
 	else:
 		anim = str(randi_range(2, bags_configuration[str(current_wave)]["range"]))
 
+	if randi_range(1, 100) <= 15:
+		anim = "life"
 
 	bag.setup(anim)
 	add_child(bag)

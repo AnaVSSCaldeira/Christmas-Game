@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dk6jicep4wbsb"]
+[gd_scene load_steps=29 format=3 uid="uid://dk6jicep4wbsb"]
 
 [ext_resource type="Texture2D" uid="uid://digsvxfcq0ufk" path="res://Game/Images/game_bg.png" id="1_f48nx"]
 [ext_resource type="Script" uid="uid://dp58e8s7i4trt" path="res://Game/Scripts/game.gd" id="1_thwfy"]
@@ -6,12 +6,26 @@
 [ext_resource type="AudioStream" uid="uid://bdgef6ycfu21c" path="res://Game/SFX and Musics/snow_by_Villatic_music.mp3" id="3_6socv"]
 [ext_resource type="PackedScene" uid="uid://dhxpq4o1g0cq8" path="res://Game/Scenes/Player.tscn" id="4_4hm0i"]
 [ext_resource type="PackedScene" uid="uid://cdhvo4lkcbn54" path="res://Game/Scenes/Score.tscn" id="5_h0auy"]
+[ext_resource type="AudioStream" uid="uid://dxpyj4ffrjj7b" path="res://Game/SFX and Musics/heal.wav" id="5_okw46"]
 [ext_resource type="Texture2D" uid="uid://cd0pfsf1ssh3j" path="res://Game/Images/screen1.png" id="7_w76w2"]
-[ext_resource type="Texture2D" uid="uid://dcce5wn20hom1" path="res://Game/Images/b_exit.png" id="8_g00g5"]
-[ext_resource type="Texture2D" uid="uid://1hbwbbly1of3" path="res://Game/Images/b_exit_hover.png" id="9_qagud"]
+[ext_resource type="Texture2D" uid="uid://deq1sl4mwmmry" path="res://Game/Images/b_close.png" id="8_mu73b"]
+[ext_resource type="Texture2D" uid="uid://cue4mywch8pq1" path="res://Game/Images/b_save.png" id="8_nraes"]
+[ext_resource type="Texture2D" uid="uid://dlpvv4omsn2sf" path="res://Game/Images/b_close_hover.png" id="9_k2p0g"]
+[ext_resource type="Texture2D" uid="uid://wgl21d17xjiu" path="res://Game/Images/b_save_hover.png" id="9_kytnq"]
+[ext_resource type="Texture2D" uid="uid://7w8qee10ybxr" path="res://Game/Images/b_menu.png" id="10_rkkfu"]
 [ext_resource type="AudioStream" uid="uid://dlxkqi3gsm286" path="res://Game/SFX and Musics/timer_countdowm.mp3" id="11_dd4jq"]
-[ext_resource type="Script" uid="uid://tmti2k8egkm8" path="res://Game/Scenes/next_wave_counter.gd" id="11_nraes"]
-[ext_resource type="Texture2D" uid="uid://ca261msxr1ajb" path="res://Game/Images/screen2.png" id="11_qagud"]
+[ext_resource type="Texture2D" uid="uid://6tsa0bquubek" path="res://Game/Images/b_menu_hover.png" id="11_jcuve"]
+[ext_resource type="Script" uid="uid://tmti2k8egkm8" path="res://Game/Scripts/next_wave_counter.gd" id="11_nraes"]
+[ext_resource type="AudioStream" uid="uid://cde0tpfoybihe" path="res://Menu/SFX and Musics/hover.wav" id="12_24xq4"]
+[ext_resource type="Texture2D" uid="uid://blu7agsdbb7xg" path="res://Game/Images/game_over.png" id="12_kytnq"]
+[ext_resource type="Texture2D" uid="uid://cfj67sb2n331i" path="res://Game/Images/b_restart.png" id="12_mu73b"]
+[ext_resource type="Texture2D" uid="uid://3nnetrur8qcn" path="res://Game/Images/b_restart_hover.png" id="13_k2p0g"]
+[ext_resource type="AudioStream" uid="uid://f4wcf7g12npa" path="res://Menu/SFX and Musics/click.wav" id="13_okw46"]
+[ext_resource type="Texture2D" uid="uid://cim25xj1qaihn" path="res://Game/Images/win.png" id="13_ryapu"]
+[ext_resource type="Texture2D" uid="uid://buoipgk3nbv0u" path="res://Game/Images/b_yes.png" id="14_sulgr"]
+[ext_resource type="Texture2D" uid="uid://dke6es7mr54sg" path="res://Game/Images/b_yes_hover.png" id="15_7wrn6"]
+[ext_resource type="Texture2D" uid="uid://dll5pt7jwstyw" path="res://Game/Images/b_no.png" id="16_rkkfu"]
+[ext_resource type="Texture2D" uid="uid://c1ymvjidyxu43" path="res://Game/Images/b_no_hover.png" id="17_jcuve"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4hm0i"]
 size = Vector2(3371.6458, 169.99911)
@@ -104,42 +118,24 @@ parameters/looping = true
 position = Vector2(1082, 638.00006)
 scale = Vector2(0.6000037, 0.6000037)
 
+[node name="Heal" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("5_okw46")
+volume_db = -5.0
+bus = &"SFX"
+
 [node name="BagSpawner" parent="." instance=ExtResource("2_6socv")]
+process_mode = 1
 position = Vector2(2217, 609)
 
-[node name="Limits" type="CharacterBody2D" parent="."]
-position = Vector2(1086, 1049)
-scale = Vector2(0.6000037, 0.6000037)
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Limits"]
-position = Vector2(-177.4989, 44.999756)
-shape = SubResource("RectangleShape2D_4hm0i")
-
-[node name="Limits2" type="CharacterBody2D" parent="."]
-position = Vector2(153, 210)
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Limits2"]
-position = Vector2(35, 294)
-shape = SubResource("RectangleShape2D_h0auy")
-
-[node name="Score" parent="." instance=ExtResource("5_h0auy")]
-position = Vector2(254, 485.99997)
-scale = Vector2(9.946765, 26.417887)
-
-[node name="Wave_timer" type="Timer" parent="."]
-one_shot = true
-
 [node name="Pause" type="Control" parent="."]
-process_mode = 3
-visible = false
+process_mode = 2
+z_index = 4
 layout_mode = 3
 anchors_preset = 0
-offset_left = 930.0
-offset_top = 520.0
-offset_right = 970.0
-offset_bottom = 560.0
+offset_left = 994.0
+offset_top = 474.0
+offset_right = 1034.0
+offset_bottom = 514.0
 
 [node name="Screen" type="Sprite2D" parent="Pause"]
 texture_filter = 1
@@ -148,9 +144,9 @@ texture = ExtResource("7_w76w2")
 [node name="VBoxContainer" type="VBoxContainer" parent="Pause"]
 layout_mode = 0
 offset_left = -372.0
-offset_top = -317.0
+offset_top = -171.0
 offset_right = 124.0
-offset_bottom = -114.0
+offset_bottom = 32.0
 scale = Vector2(1.5, 1.5)
 theme_override_constants/separation = 10
 
@@ -198,87 +194,233 @@ mouse_default_cursor_shape = 2
 max_value = 1.0
 step = 0.05
 
-[node name="Save" type="TextureButton" parent="Pause"]
-layout_mode = 0
-offset_left = -91.0
-offset_top = 31.0
-offset_right = 309.0
-offset_bottom = 231.0
-scale = Vector2(0.5, 0.5)
-mouse_default_cursor_shape = 2
-texture_normal = ExtResource("8_g00g5")
-texture_hover = ExtResource("9_qagud")
-
 [node name="Close" type="TextureButton" parent="Pause"]
 layout_mode = 0
-offset_left = 357.0
-offset_top = -349.0
-offset_right = 397.0
-offset_bottom = -309.0
+offset_left = 340.0
+offset_top = -350.0
+offset_right = 540.0
+offset_bottom = -150.0
+scale = Vector2(0.3, 0.3)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("8_mu73b")
+texture_hover = ExtResource("9_k2p0g")
 
-[node name="EndGame" type="Control" parent="."]
+[node name="Hover" type="AudioStreamPlayer" parent="Pause/Close"]
+stream = ExtResource("12_24xq4")
+bus = &"SFX"
+
+[node name="Click" type="AudioStreamPlayer" parent="Pause/Close"]
+process_mode = 3
+stream = ExtResource("13_okw46")
+bus = &"SFX"
+
+[node name="Buttons" type="HBoxContainer" parent="Pause"]
+layout_mode = 0
+offset_left = -338.0
+offset_top = 182.0
+offset_right = 1022.0
+offset_bottom = 382.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/separation = 80
+
+[node name="Save" type="TextureButton" parent="Pause/Buttons"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("8_nraes")
+texture_hover = ExtResource("9_kytnq")
+
+[node name="Hover" type="AudioStreamPlayer" parent="Pause/Buttons/Save"]
+stream = ExtResource("12_24xq4")
+bus = &"SFX"
+
+[node name="Click" type="AudioStreamPlayer" parent="Pause/Buttons/Save"]
+process_mode = 3
+stream = ExtResource("13_okw46")
+bus = &"SFX"
+
+[node name="Menu" type="TextureButton" parent="Pause/Buttons"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("10_rkkfu")
+texture_hover = ExtResource("11_jcuve")
+
+[node name="Hover" type="AudioStreamPlayer" parent="Pause/Buttons/Menu"]
+stream = ExtResource("12_24xq4")
+bus = &"SFX"
+
+[node name="Click" type="AudioStreamPlayer" parent="Pause/Buttons/Menu"]
+process_mode = 3
+stream = ExtResource("13_okw46")
+bus = &"SFX"
+
+[node name="Restart" type="TextureButton" parent="Pause/Buttons"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("12_mu73b")
+texture_hover = ExtResource("13_k2p0g")
+
+[node name="Hover" type="AudioStreamPlayer" parent="Pause/Buttons/Restart"]
+stream = ExtResource("12_24xq4")
+bus = &"SFX"
+
+[node name="Click" type="AudioStreamPlayer" parent="Pause/Buttons/Restart"]
+process_mode = 3
+stream = ExtResource("13_okw46")
+bus = &"SFX"
+
+[node name="Screens_End_Game" type="Control" parent="."]
+process_mode = 2
+z_index = 4
 layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GameOver" type="Control" parent="Screens_End_Game"]
 anchors_preset = 0
 offset_left = 994.0
 offset_top = 474.0
 offset_right = 1034.0
 offset_bottom = 514.0
 
-[node name="Sprite2D" type="Sprite2D" parent="EndGame"]
-position = Vector2(0, 51.99996)
-scale = Vector2(1, 1.1485714)
-texture = ExtResource("11_qagud")
+[node name="Sprite2D" type="Sprite2D" parent="Screens_End_Game/GameOver"]
+texture = ExtResource("12_kytnq")
 
-[node name="TextureButton" type="TextureButton" parent="EndGame"]
+[node name="GameOver" type="Label" parent="Screens_End_Game/GameOver"]
+layout_mode = 0
+offset_left = -385.0
+offset_top = -157.0
+offset_right = 386.0
+offset_bottom = 66.0
+theme_override_font_sizes/font_size = 80
+text = "Oh no! You loose!
+Do you wanna try
+again?"
+horizontal_alignment = 1
+autowrap_mode = 1
+
+[node name="Winner" type="Control" parent="Screens_End_Game"]
+anchors_preset = 0
+offset_left = 994.0
+offset_top = 474.0
+offset_right = 1034.0
+offset_bottom = 514.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Screens_End_Game/Winner"]
+texture = ExtResource("13_ryapu")
+
+[node name="Win" type="Label" parent="Screens_End_Game/Winner"]
+layout_mode = 0
+offset_left = -385.0
+offset_top = -165.0
+offset_right = 389.0
+offset_bottom = 171.0
+theme_override_font_sizes/font_size = 80
+text = "Uhuuul!
+Score: 5000 points!
+Try again?"
+horizontal_alignment = 1
+autowrap_mode = 1
+
+[node name="TextureButton" type="TextureButton" parent="Screens_End_Game/Winner"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Buttons" type="Control" parent="Screens_End_Game"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Yes" type="TextureButton" parent="Screens_End_Game/Buttons"]
+layout_mode = 0
+offset_left = 754.0
+offset_top = 680.0
+offset_right = 1154.0
+offset_bottom = 880.0
+scale = Vector2(0.5, 0.5)
 mouse_default_cursor_shape = 2
+texture_normal = ExtResource("14_sulgr")
+texture_hover = ExtResource("15_7wrn6")
 
-[node name="Win" type="Label" parent="EndGame"]
-layout_mode = 0
-offset_left = -347.0
-offset_top = -351.0
-offset_right = 342.0
-offset_bottom = 206.0
-theme_override_font_sizes/font_size = 100
-text = "Uhuuul!
-You did it!
-Do you wanna
-try again?"
-horizontal_alignment = 1
+[node name="Hover" type="AudioStreamPlayer" parent="Screens_End_Game/Buttons/Yes"]
+stream = ExtResource("12_24xq4")
+bus = &"SFX"
 
-[node name="GameOver" type="Label" parent="EndGame"]
+[node name="Click" type="AudioStreamPlayer" parent="Screens_End_Game/Buttons/Yes"]
+process_mode = 3
+stream = ExtResource("13_okw46")
+bus = &"SFX"
+
+[node name="No" type="TextureButton" parent="Screens_End_Game/Buttons"]
 layout_mode = 0
-offset_left = -595.0
-offset_top = -303.0
-offset_right = 590.0
-offset_bottom = 114.0
-theme_override_font_sizes/font_size = 100
-text = "Oh no!
-Do you wanna
-try again?"
-horizontal_alignment = 1
+offset_left = 1042.0
+offset_top = 680.0
+offset_right = 1442.0
+offset_bottom = 880.0
+scale = Vector2(0.5, 0.5)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("16_rkkfu")
+texture_hover = ExtResource("17_jcuve")
+
+[node name="Hover" type="AudioStreamPlayer" parent="Screens_End_Game/Buttons/No"]
+stream = ExtResource("12_24xq4")
+bus = &"SFX"
+
+[node name="Click" type="AudioStreamPlayer" parent="Screens_End_Game/Buttons/No"]
+process_mode = 3
+stream = ExtResource("13_okw46")
+bus = &"SFX"
+
+[node name="Limits" type="CharacterBody2D" parent="."]
+position = Vector2(1086, 1049)
+scale = Vector2(0.6000037, 0.6000037)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Limits"]
+position = Vector2(-177.4989, 44.999756)
+shape = SubResource("RectangleShape2D_4hm0i")
+
+[node name="Limits2" type="CharacterBody2D" parent="."]
+position = Vector2(153, 210)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Limits2"]
+position = Vector2(35, 294)
+shape = SubResource("RectangleShape2D_h0auy")
+
+[node name="Score" parent="." instance=ExtResource("5_h0auy")]
+position = Vector2(254, 485.99997)
+scale = Vector2(9.946765, 26.417887)
+
+[node name="Wave_timer" type="Timer" parent="."]
+process_mode = 1
+one_shot = true
 
 [node name="Next_wave_counter" type="Marker2D" parent="."]
+process_mode = 1
 script = ExtResource("11_nraes")
 
 [node name="Numbers" type="Label" parent="Next_wave_counter"]
-visible = false
 offset_left = 836.0
 offset_top = 222.0
 offset_right = 1178.0
 offset_bottom = 495.0
 theme_override_font_sizes/font_size = 200
-text = "999"
 horizontal_alignment = 1
 
 [node name="Countdown" type="AudioStreamPlayer" parent="Next_wave_counter"]
+process_mode = 1
 stream = ExtResource("11_dd4jq")
+bus = &"SFX"
 
 [node name="Timer" type="Timer" parent="Next_wave_counter"]
 
-[connection signal="timeout" from="Wave_timer" to="." method="_on_wave_timer_timeout"]
-[connection signal="pressed" from="Pause/Save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="Pause/Close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Pause/Buttons/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Pause/Buttons/Menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="Pause/Buttons/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Screens_End_Game/Buttons/Yes" to="." method="_on_yes_pressed"]
+[connection signal="pressed" from="Screens_End_Game/Buttons/No" to="." method="_on_no_pressed"]
+[connection signal="timeout" from="Wave_timer" to="." method="_on_wave_timer_timeout"]
 [connection signal="timeout" from="Next_wave_counter/Timer" to="Next_wave_counter" method="_on_timer_timeout"]
